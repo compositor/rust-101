@@ -42,7 +42,7 @@ fn vec_min(v: &Vec<BigInt>) -> Option<BigInt> {
 }
 //@ Now, what's happening here? Why do we have to to make a full (deep) copy of `e`, and why did we
 //@ not have to do that in our previous version?
-//@ 
+//@
 //@ The answer is already hidden in the type of `vec_min`: `v` is just borrowed, but
 //@ the Option<BigInt> that it returns is *owned*. We can't just return one of the elements of `v`,
 //@ as that would mean that it is no longer in the vector! In our code, this comes up when we update
@@ -139,13 +139,13 @@ fn rust_foo(mut v: Vec<i32>) -> i32 {
 //@ point is, saying that you borrowed your friend a `Vec<i32>`, or a book, is not good enough,
 //@ unless you also agree on *how long* your friend can borrow it. After all, you need to know when
 //@ you can rely on owning your data (or book) again.
-//@ 
+//@
 //@ Every reference in Rust has an associated lifetime, written `&'a T` for a reference with
 //@ lifetime `'a` to something of type `T`. The full type of `head` reads as follows: `fn<'a,
 //@ T>(&'a Vec<T>) -> Option<&'a T>`. Here, `'a` is a *lifetime variable*, which represents for how
 //@ long the vector has been borrowed. The function type expresses that argument and return value
 //@ have *the same lifetime*.
-//@ 
+//@
 //@ When analyzing the code of `rust_foo`, Rust has to assign a lifetime to `first`. It will choose
 //@ the scope where `first` is valid, which is the entire rest of the function. Because `head` ties
 //@ the lifetime of its argument and return value together, this means that `&v` also has to borrow
@@ -153,7 +153,7 @@ fn rust_foo(mut v: Vec<i32>) -> i32 {
 //@ reference to `v` for `push`, Rust complains that the two references (the one for `head`, and
 //@ the one for `push`) overlap, so neither of them can be unique. Lucky us! Rust caught our
 //@ mistake and made sure we don't crash the program.
-//@ 
+//@
 //@ So, to sum this up: Lifetimes enable Rust to reason about *how long* a reference is valid, how
 //@ long ownership has been borrowed. We can thus safely write functions like `head`, that return
 //@ references into data they got as argument, and make sure they are used correctly, *while
@@ -162,7 +162,7 @@ fn rust_foo(mut v: Vec<i32>) -> i32 {
 //@ application code. Most of the time, we don't have to explicitly add lifetimes to function
 //@ types. This is thanks to *lifetime elision*, where Rust will automatically insert lifetimes we
 //@ did not specify, following some simple, well-documented
-//@ [rules](https://doc.rust- lang.org/stable/book/lifetimes.html#lifetime-elision).
+//@ [rules](https://doc.rust-lang.org/stable/book/ch10-03-lifetime-syntax.html).
 
 //@ [index](main.html) | [previous](part05.html) | [raw source](workspace/src/part06.rs) |
 //@ [next](part07.html)

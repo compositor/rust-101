@@ -85,7 +85,7 @@ impl PartialEq for BigInt {
 //@ `ToString`.
 //@ Compare that to C++ or Java, where the only chance to add a new overloading variant is to
 //@ edit the class of the receiver.
-//@ 
+//@
 //@ Why can we also use `!=`, even though we just overloaded `==`? The answer lies in what's called
 //@ a *default implementation*. If you check out the documentation of `PartialEq` I linked above,
 //@ you will see that the trait actually provides two methods: `eq` to test equality, and `ne` to
@@ -124,7 +124,7 @@ fn test_min() {
 //@ internal state of data and targeted at the programmer. The latter is what we want for
 //@ `assert_eq!`, so let's get started.
 
-// All formating is handled by [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html). I won't
+// All formatting is handled by [`std::fmt`](https://doc.rust-lang.org/std/fmt/index.html). I won't
 // explain all the details, and refer you to the documentation instead.
 use std::fmt;
 

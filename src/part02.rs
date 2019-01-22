@@ -31,8 +31,8 @@ type NumberOrNothing = SomethingOrNothing<i32>;
 // ## Generic `impl`, Static functions
 //@ The types are so similar, that we can provide a generic function to construct a
 //@ `SomethingOrNothing<T>` from an `Option<T>`, and vice versa.
-//@ 
-//@ Notice the syntax for giving generic implementations to generic types: Think of the first `<T>` 
+//@
+//@ Notice the syntax for giving generic implementations to generic types: Think of the first `<T>`
 //@ as *declaring* a type variable ("I am doing something for all types `T`"), and the second `<T>`
 //@ as *using* that variable ("The thing I do, is implement `SomethingOrNothing<T>`").
 //@
@@ -51,7 +51,7 @@ impl<T> SomethingOrNothing<T> {
 //@ Observe how `new` does *not* have a `self` parameter. This corresponds to a `static` method
 //@ in Java or C++. In fact, `new` is the Rust convention for defining constructors: They are
 //@ nothing special, just static functions returning `Self`.
-//@ 
+//@
 // You can call static functions, and in particular constructors, as demonstrated in `call_constructor`.
 fn call_constructor(x: i32) -> SomethingOrNothing<i32> {
     SomethingOrNothing::new(Some(x))
@@ -77,9 +77,9 @@ pub trait Minimum : Copy {
 //@ Next, we write `vec_min` as a generic function over a type `T` that we demand to satisfy the `Minimum` trait.
 //@ This requirement is called a *trait bound*.
 //@ The only difference to the version from the previous part is that we call `e.min(n)` instead
-//@ of `std::cmp::min(n, e)`. Rust automatically figures out that `n` is of type `T`, which implements
+//@ of `std::cmp::min(n, e)`. Rust automatically figures out that `e` is of type `T`, which implements
 //@ the `Minimum` trait, and hence we can call that function.
-//@ 
+//@
 //@ There is a crucial difference to templates in C++: We actually have to declare which traits
 //@ we want the type to satisfy. If we left away the `Minimum`, Rust would have complained that
 //@ we cannot call `min`. Just try it! <br/>
@@ -103,7 +103,7 @@ pub fn vec_min<T: Minimum>(v: Vec<T>) -> SomethingOrNothing<T> {
 //@ *for an existing type*. With the hierarchical approach of, e.g., C++ or Java,
 //@ that's not possible: We cannot make an existing type also inherit from our abstract base class
 //@ after the fact.
-//@ 
+//@
 //@ In case you are worried about performance, note that Rust performs *monomorphisation*
 //@ of generic functions: When you call `vec_min` with `T` being `i32`, Rust essentially goes
 //@ ahead and creates a copy of the function for this particular type, filling in all the blanks.
